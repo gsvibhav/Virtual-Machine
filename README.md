@@ -20,23 +20,22 @@ graph TB
         subgraph "Resource Group"
             subgraph "Virtual Network (10.0.0.0/16)"
                 subgraph "VM Subnet (10.0.1.0/24)"
-                    VM[🖥️ Windows Server 2019<br/>Standard_D2ds_v4<br/>Premium SSD]
-                    NIC[📡 Network Interface<br/>Private IP: Dynamic]
+                    VM["🖥️ Windows Server 2019<br/>Standard_D2ds_v4<br/>Premium SSD"]
+                    NIC["📡 Network Interface<br/>Private IP: Dynamic"]
                 end
                 
                 subgraph "AzureBastionSubnet (10.0.2.0/26)"
-                    BASTION[🔐 Azure Bastion<br/>Secure RDP Access]
+                    BASTION["🔐 Azure Bastion<br/>Secure RDP Access"]
                 end
             end
             
-            PIP[🌐 Public IP Address<br/>Static IP<br/>Standard SKU]
-            NSG[🛡️ Network Security Group<br/>Allow RDP (3389)]
-            KV[🔑 Azure Key Vault<br/>Admin Password Storage]
+            PIP["🌐 Public IP Address<br/>Static IP<br/>Standard SKU"]
+            KV["🔑 Azure Key Vault<br/>Admin Password Storage"]
         end
     end
     
-    USER[👤 User<br/>Browser/Portal]
-    INTERNET[🌍 Internet]
+    USER["👤 User<br/>Browser/Portal"]
+    INTERNET["🌍 Internet"]
     
     %% Connections
     USER --> INTERNET
@@ -44,7 +43,6 @@ graph TB
     PIP --> BASTION
     BASTION -.->|Secure RDP| VM
     NIC --> VM
-    NSG --> NIC
     KV -.->|Retrieve Secret| VM
     
     %% Styling
@@ -55,7 +53,7 @@ graph TB
     
     class VM,NIC vmClass
     class BASTION,PIP networkClass
-    class NSG,KV securityClass
+    class KV securityClass
     class USER userClass
 ```
 
@@ -135,7 +133,6 @@ Virtual-Machine/
 
 ### Security Features
 - **Azure Bastion**: Eliminates need for public IP on VM
-- **NSG Rules**: Configured for RDP access (port 3389)
 - **Key Vault Integration**: Secure password management
 - **Automatic Updates**: Enabled for Windows VM
 
@@ -219,14 +216,6 @@ az group delete --name "your-resource-group" --yes --no-wait
 4. Push to the branch (`git push origin feature/improvement`)
 5. Create a Pull Request
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## 📧 Support
 
-For questions or issues, please open an issue in this repository or contact the maintainer.
-
----
-
-**Built with ❤️ using Azure Bicep**
+For questions or issues, please open an issue in this repository.
